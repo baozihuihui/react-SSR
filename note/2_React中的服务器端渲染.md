@@ -7,3 +7,7 @@
 ## 虚拟 DOM
 
 虚拟 DOM 是真实 DOM 的一个 js 对象映射。能够在客户端渲染时提升渲染性能，同时在服务端渲染时，方便直接输出对应 HTML。
+
+## ReactDom.renderToString(\<ReactElement />)
+
+能够将 ReactElement 转换为一段 html 代码，但是合成时间并不会被转换。
