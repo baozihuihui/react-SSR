@@ -29,6 +29,7 @@ class FileOperatePool {
 }
 
 class FileOperate {
+  // 初始化文件操作时检查文件是否存在，若不存在则创建！
   constructor(public path: string) {
     if (!fs.existsSync(path)) {
       fs.writeFileSync(path, "{}");
