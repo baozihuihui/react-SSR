@@ -1,10 +1,13 @@
 import express from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
-import Home from "./container/Home";
+import Home from "../container/Home";
 
 const app = express();
 const port = 3000;
+
+app.use(express.static("clientDist"));
+
 const content = renderToString(<Home />);
 
 app.get("/", (req, res) =>
@@ -14,8 +17,9 @@ app.get("/", (req, res) =>
             <title>React-SSR</title>
         </head>
         <body>
-            ${content}
+            <div id="root">${content}</div>
         </body>
+        <script src="/index.js" ></script>
     </html>
 `)
 );
