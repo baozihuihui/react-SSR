@@ -1,11 +1,13 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 // 引入 路由控制器 自动执行装饰器
 import "./controller/HomeMessageController";
 import router from "./router";
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 app.use(router);
 
 app.listen(7001, () => {
