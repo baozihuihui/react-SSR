@@ -5,7 +5,9 @@ import { getHomeList } from "./store";
 
 const Home = (props) => {
   useEffect(() => {
-    props.getHomeList();
+    if (!props.home.newsList.length) {
+      props.getHomeList();
+    }
   }, []);
 
   return (
@@ -19,8 +21,18 @@ const Home = (props) => {
       >
         click
       </button>
+      {props.home.newsList.map((item) => (
+        <div key={item.id}>
+          <p>时间戳:{item.id}</p>
+          <span>{JSON.stringify(item.data)}</span>
+        </div>
+      ))}
     </>
   );
+};
+
+Home.getHomelist = (store) => {
+  return store.dispatch(getHomeList());
 };
 
 const mapStateToProps = (state) => ({
