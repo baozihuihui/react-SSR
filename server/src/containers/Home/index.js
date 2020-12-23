@@ -5,6 +5,7 @@ import { getHomeList } from "./store";
 
 const Home = (props) => {
   useEffect(() => {
+    // ! 这样是不对的 切换页面时，无法即使获取最新列表
     if (!props.home.newsList.length) {
       props.getHomeList();
     }
@@ -12,7 +13,6 @@ const Home = (props) => {
 
   return (
     <>
-      <Header />
       <p>hello {props.home.name}!</p>
       <button
         onClick={() => {

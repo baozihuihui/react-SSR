@@ -1,23 +1,29 @@
-import React from "react";
-import { Route } from "react-router-dom";
+import { renderRoutes } from "react-router-config";
+import App from "./App.js";
 import Home from "./containers/Home";
 import Login from "./containers/Login";
 
 export const routes = [
   {
-    key: "home",
+    key: "app",
     path: "/",
-    exact: true,
-    component: Home,
-    loadData: Home.getHomelist,
-  },
-  {
-    key: "login",
-    path: "/login",
-    component: Login,
+    component: App,
+    routes: [
+      {
+        key: "home",
+        path: "/home",
+        component: Home,
+        loadData: Home.getHomelist,
+      },
+      {
+        key: "login",
+        path: "/login",
+        component: Login,
+      },
+    ],
   },
 ];
 
-const Routes = () => routes.map((route) => <Route {...route} />);
+const Routes = () => renderRoutes(routes);
 
 export default Routes;
