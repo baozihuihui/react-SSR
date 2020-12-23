@@ -20,8 +20,6 @@ const Header = (props) => {
     <>
       <Link to="/">首页</Link>
       <br />
-      <Link to="/home">新闻</Link>
-      <br />
       {props.head.isLogin ? (
         <>
           <button href="" onClick={logoutBtn}>

@@ -12,6 +12,7 @@ const Home = (props) => {
 
   return (
     <>
+      <h1>Home Component</h1>
       <p>hello {props.home.name}!</p>
       <button
         onClick={() => {

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { getTranslationList } from "./store";
 
 const Translation = (props) => {
@@ -12,12 +13,19 @@ const Translation = (props) => {
 
   return (
     <>
-      {props.translation.newsList.map((item) => (
-        <div key={item.id}>
-          <p>时间戳:{item.id}</p>
-          <span>{JSON.stringify(item.data)}</span>
-        </div>
-      ))}
+      <h1>Translation Component</h1>
+      {props.isLogin ? (
+        <>
+          {props.translation.newsList.map((item) => (
+            <div key={item.id}>
+              <p>时间戳:{item.id}</p>
+              <span>{JSON.stringify(item.data)}</span>
+            </div>
+          ))}
+        </>
+      ) : (
+        <Redirect to="/" />
+      )}
     </>
   );
 };
@@ -28,6 +36,7 @@ Translation.loadData = (store) => {
 
 const mapStateToProps = (state) => ({
   translation: state.translation,
+  isLogin: state.head.isLogin,
 });
 
 const mapDispatchToProps = (dispatch) => ({
