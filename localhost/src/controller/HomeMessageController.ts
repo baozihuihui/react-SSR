@@ -8,17 +8,17 @@ import FileOperatePool from "../util/FileOperate";
 
 interface HomeMessage {
   title: string;
-  content: string;
+  counter: number;
 }
 
 @controller("/api")
 class HomeMessageController {
   @RequestConfig(Methods.GET, "/getHomeMessage")
   getData(req: BodyReauest, res: Response): void {
-    const fileOperate = FileOperatePool.getFileOperate(
+    const fileOperate = FileOperatePool.getFileOperate<HomeMessage>(
       getFilePath(FileType.HOME)
     );
-    res.json(getResponseData(fileOperate.getData<HomeMessage>()));
+    res.json(getResponseData(fileOperate.getData()));
   }
 }
 
