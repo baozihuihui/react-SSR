@@ -1,4 +1,5 @@
 import express from "express";
+import proxy from "express-http-proxy";
 import { matchRoutes } from "react-router-config";
 import { routes } from "../Routes";
 import { getStore } from "../store/index";
@@ -8,6 +9,19 @@ const app = express();
 const port = 3000;
 
 app.use(express.static("clientDist"));
+
+// 请求地址：  /api/getHomeMessage
+// req.url = /getHomeMessage
+// return    /api + req.url
+
+app.use(
+  "/api",
+  proxy("http://localhost:7001", {
+    proxyReqPathResolver: function (req) {
+      return `/api${req.url}`;
+    },
+  })
+);
 
 app.get("*", (req, res) => {
   const store = getStore();

@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../../axios";
 import { CHANGE_LIST } from "./contants";
 
 const changeList = (list) => ({
@@ -8,7 +8,7 @@ const changeList = (list) => ({
 
 export const getHomeList = () => {
   return (dispatch) => {
-    return axios.get("http://localhost:7001/api/getHomeMessage").then((res) => {
+    return api.get("/api/getHomeMessage").then((res) => {
       const list = res.data.data;
       dispatch(changeList(list));
     });
