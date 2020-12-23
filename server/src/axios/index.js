@@ -1,6 +1,12 @@
 import axios from "axios";
-const api = axios.create({
-  baseURL: "http://localhost:3000",
-});
+export const serverAxios = (req) =>
+  axios.create({
+    baseURL: "http://localhost:3000",
+    headers: {
+      cookie: req.get("cookie") || "", // 从请求中拿到cookie
+    },
+  });
 
-export default api;
+export const clientAxios = axios.create({
+  baseURL: "/",
+});

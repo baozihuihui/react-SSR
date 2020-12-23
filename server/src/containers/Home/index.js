@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import Header from "../../components/Header";
 import { getHomeList } from "./store";
 
 const Home = (props) => {
@@ -31,7 +30,7 @@ const Home = (props) => {
   );
 };
 
-Home.getHomelist = (store) => {
+Home.loadData = (store) => {
   return store.dispatch(getHomeList());
 };
 
@@ -45,4 +44,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps, null)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

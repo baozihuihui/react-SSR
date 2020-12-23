@@ -24,7 +24,7 @@ app.use(
 );
 
 app.get("*", (req, res) => {
-  const store = getStore();
+  const store = getStore(req);
   // 根据路由的路径，来往store里面添加数据
   const matchedRoutes = matchRoutes(routes, req.path);
   // 让 matchedRoutes里面所有的组件，对应的loadData方法执行一次

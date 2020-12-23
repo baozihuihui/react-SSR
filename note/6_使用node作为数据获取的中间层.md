@@ -41,7 +41,7 @@ app.use(
 
   axios.get("http://localhost:3000/api/getHomeMessage")
 
-  缺点：不优雅，而且服务器变更需要变更大量代码
+  缺点：不优雅，而且服务器变更需要变更大量代码,且无法携带 cookie 等客户端信息到 node 请求中
 
 - 创建 axios 实例，指定 BaseURL 为服务器地址
 
@@ -50,7 +50,7 @@ app.use(
   fucntion(dispatch){ axios.get('/api/getHomeMessage') }
   ```
 
-  缺点：服务端是所有请求公用同一个实例
+  缺点：服务端是所有请求公用同一个实例,且无法携带 cookie 等客户端信息到 node 请求中
 
 - 指定 node 服务器地址 端口为 8080
 
@@ -61,10 +61,12 @@ app.use(
 - 利用 redux-thunk 的 withExtraArgument 将 axiosInstance 传递到异步 action 中
 
   ```language=javascript
-    const serverAxios = axios.create({baseURL:'http://localhost:3000'});
-    const store = createStore(reducer,applyMiddleware(thunk.withExtraArgument(serverAxios)));
-    // 调用的时候就可以通过第三个参数获取到变量了
-    fucntion(dispatch,getState,axios){ axios.get('/api/getHomeMessage') }
+  // 创建 axios 实例，设置服务端接收到的cookie
+  const serverAxios = (req) => axios.create({baseURL:'http://localhost:3000',header:{cookie: req.get("cookie") || "",}});
+  // 创建 store,并将 axios 向下传递
+  const store = createStore(reducer,applyMiddleware(thunk.withExtraArgument(serverAxios(req))));
+  // 调用的时候就可以通过第三个参数获取到变量了
+  fucntion(dispatch,getState,axios){ axios.get('/api/getHomeMessage') }
   ```
 
-  缺点：状态管理使用异步函数限定比较死
+  缺点：状态管理使用异步函数限定比较死，但是可以传递 cookie 等值

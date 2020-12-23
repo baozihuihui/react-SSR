@@ -5,9 +5,9 @@ const changeList = (list) => ({
   list,
 });
 
-export const getHomeList = () => {
+export const getTranslationList = () => {
   return (dispatch, getState, axios) => {
-    return axios.get("/api/getHomeMessage").then((res) => {
+    return axios.get("/api/getTranslation").then((res) => {
       const list = res.data.data;
       dispatch(changeList(list));
     });
