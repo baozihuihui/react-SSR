@@ -10,7 +10,7 @@ export default function getResponseData<T>(
     data,
   };
 
-  if (errMsg) {
+  if (errMsg && errMsg !== "") {
     defaultResult.result = false;
     defaultResult.errMsg = errMsg;
   }

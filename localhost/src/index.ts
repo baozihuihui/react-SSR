@@ -5,6 +5,7 @@ import cors from "cors";
 // 引入 路由控制器 自动执行装饰器
 import "./controller/HomeMessageController";
 import "./controller/LoginController";
+import "./controller/TranslationController";
 import router from "./router";
 
 const app = express();

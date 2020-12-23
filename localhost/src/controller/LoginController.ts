@@ -23,16 +23,16 @@ class HomeMessageController {
     const { session } = req;
     if (session) {
       const isLogin = !!session.login;
-      if (isLogin) {
-        res.json(getResponseData(false, "you had logined !"));
-      } else {
-        if (req.body.password === "123") {
-          session.login = true;
-          res.json(getResponseData(true));
-        } else {
-          res.json(getResponseData(false, "password error !"));
-        }
-      }
+      // if (isLogin) {
+      //   res.json(getResponseData(false, "you had logined !"));
+      // } else {
+      // if (req.body.password === "123") {
+      session.login = true;
+      res.json(getResponseData(true));
+      // } else {
+      //   res.json(getResponseData(false, "password error !"));
+      // }
+      // }
     } else {
       res.end("session error");
     }
