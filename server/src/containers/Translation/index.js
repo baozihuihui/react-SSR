@@ -30,10 +30,6 @@ const Translation = (props) => {
   );
 };
 
-Translation.loadData = (store) => {
-  return store.dispatch(getTranslationList());
-};
-
 const mapStateToProps = (state) => ({
   translation: state.translation,
   isLogin: state.head.isLogin,
@@ -45,4 +41,13 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Translation);
+const ExportTranslation = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Translation);
+
+ExportTranslation.loadData = (store) => {
+  return store.dispatch(getTranslationList());
+};
+
+export default ExportTranslation;

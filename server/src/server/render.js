@@ -2,7 +2,7 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import Routes from "../Routes";
+import Routes from "../common/routeConfig";
 
 export const render = (req, store, context) => {
   const content = renderToString(
@@ -12,14 +12,17 @@ export const render = (req, store, context) => {
       </StaticRouter>
     </Provider>
   );
-  return getHtmlTemp(content, store);
+
+  const cssArr = context.cssArr.length ? context.cssArr : "";
+  return getHtmlTemp(content, store, cssArr);
 };
 
-const getHtmlTemp = (content, store) => {
+const getHtmlTemp = (content, store, cssArr) => {
   return `
   <html>
       <head>
           <title>React-SSR</title>
+          <style id="server-css" >${cssArr.join("\n")}</style>
       </head>
       <body>
           <div id="root">${content}</div>

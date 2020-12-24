@@ -1,8 +1,8 @@
 import { renderRoutes } from "react-router-config";
-import App from "./App.js";
-import Home from "./containers/Home";
-import Translation from "./containers/Translation";
-import NotFound from "./containers/NotFound";
+import App from "../../containers/App";
+import Home from "../../containers/Home";
+import Translation from "../../containers/Translation";
+import NotFound from "../../containers/NotFound";
 
 export const routes = [
   {

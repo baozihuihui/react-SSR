@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import styles from "./index.css";
 import { logout, login } from "./store";
+import withStyles from "../../hoc/withStyles";
 
 const Header = (props) => {
   const logoutBtn = (e) => {
@@ -17,21 +19,17 @@ const Header = (props) => {
   };
 
   return (
-    <>
+    <div className={styles.test}>
       <Link to="/">首页</Link>
-      <br />
       {props.head.isLogin ? (
         <>
-          <button href="" onClick={logoutBtn}>
-            退出
-          </button>
-          <br />
+          <button onClick={logoutBtn}>退出</button>
           <Link to="/translation">获取数据</Link>
         </>
       ) : (
         <button onClick={loginBtn}>登陆</button>
       )}
-    </>
+    </div>
   );
 };
 
@@ -48,4 +46,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(Header, styles));

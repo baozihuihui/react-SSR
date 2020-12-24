@@ -1,8 +1,8 @@
 import express from "express";
 import proxy from "express-http-proxy";
 import { matchRoutes } from "react-router-config";
-import { routes } from "../Routes";
-import { getStore } from "../store/index";
+import { routes } from "../common/routeConfig";
+import { getStore } from "../common/store";
 import { render } from "./render";
 
 const app = express();
@@ -40,7 +40,7 @@ app.get("*", (req, res) => {
     }
   });
   Promise.all(promises).then(() => {
-    const context = {};
+    const context = { cssArr: [] };
     const html = render(req, store, context);
     // 利用 staticContext 处理 服务端 重定向
     if (context.action === "REPLACE") {

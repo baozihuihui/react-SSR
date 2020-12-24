@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { serverAxios, clientAxios } from "../axios";
-import { reducer as HomeReducer } from "../containers/Home/store";
-import { reducer as Translation } from "../containers/Translation/store";
-import { reducer as HeadReducer } from "../components/Header/store";
+import { reducer as HomeReducer } from "../../containers/Home/store";
+import { reducer as Translation } from "../../containers/Translation/store";
+import { reducer as HeadReducer } from "../../common/components/Header/store";
 
 const reducer = combineReducers({
   home: HomeReducer,
