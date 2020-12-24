@@ -2,12 +2,9 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getHomeList } from "./store";
 import styles from "./index.css";
+import withStyles from "../../common/hoc/withStyles";
 
 const Home = (props) => {
-  if (props.staticContext) {
-    props.staticContext.cssArr.push(styles._getCss());
-  }
-
   useEffect(() => {
     // ! 这样是不对的 切换页面时，无法即使获取最新列表
     if (!props.home.newsList.length) {
@@ -46,7 +43,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const ExportHome = connect(mapStateToProps, mapDispatchToProps)(Home);
+const ExportHome = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(Home, styles));
 
 ExportHome.loadData = (store) => {
   return store.dispatch(getHomeList());

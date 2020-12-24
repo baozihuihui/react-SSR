@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { StylecssContext } from "../context/StylecssContext";
 
 export default function withStyles(WrapComponent, styles) {
   return (props) => {
-    if (props.staticContext && styles._getCss) {
-      props.staticContext.cssArr.push(styles._getCss());
+    if (styles._getCss) {
+      const cssContext = useContext(StylecssContext);
+      cssContext.push(styles._getCss());
     }
     return <WrapComponent {...props} />;
   };
