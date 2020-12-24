@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Helmet } from "react-helmet";
 import { getHomeList } from "./store";
 import styles from "./index.css";
 import withStyles from "../../common/hoc/withStyles";
@@ -14,6 +15,11 @@ const Home = (props) => {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>React-SSR Demo Home Page</title>
+        <meta name="description" content="Helmet application for React-SSR" />
+      </Helmet>
       <h1 className={styles.test}>Home Component</h1>
       <p>hello {props.home.name}!</p>
       <button

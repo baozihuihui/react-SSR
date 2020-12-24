@@ -13,7 +13,7 @@ const webpackServerConfig = {
     path: path.resolve(__dirname, "../serverDist"),
   },
   // * 不将依赖文件打包入bundle.js
-  externals: [nodeExternals()],
+  externals: [nodeExternals(), "react-helmet"],
   module: {
     rules: [
       {

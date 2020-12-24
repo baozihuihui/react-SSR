@@ -2,6 +2,7 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import { Helmet } from "react-helmet";
 import {
   StylecssContext,
   createContext,
@@ -25,10 +26,14 @@ export const render = (req, store, context) => {
 };
 
 const getHtmlTemp = (content, store, cssString) => {
+  const helmet = Helmet.renderStatic();
+
   return `
-  <html>
+  <html ${helmet.htmlAttributes.toString()}>
       <head>
-          <title>React-SSR</title>
+          ${helmet.title.toString()}
+          ${helmet.meta.toString()}
+          ${helmet.link.toString()}
           <style id="server-css" >${cssString}</style>
       </head>
       <body>
